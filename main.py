@@ -18,7 +18,7 @@ def read_root():
 
 @app.post("/")
 def get_pixels(picture: Picture_Info):
-    return "It worked"
+    return "The dimensions you sent are: "+picture.dimensions+".  The corners you sent are "+picture.corners
     # need to fix this later
     # in your picture class need to remember to convert the strings to tuple and list
     # need to also figure out how to send two strings, maybe you don't even need to picture info class.  Need to look into post on fast api
