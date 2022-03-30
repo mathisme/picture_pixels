@@ -6,8 +6,12 @@ class Picture():
 
     def __init__(self, dims="None", corners="None"):
         # need to add a try catch here to check for invalid enteries
-        sefl.dims = literal_eval(dims)
-        self.corners = literal_eval(corners)
+        try:
+            self.dims = literal_eval(dims)
+            self.corners = literal_eval(corners)
+        except:
+            self.dims=None
+            self.corners=None
         self.min_X, self.max_X = float("inf"), float("-inf")
         self.min_Y, self.max_Y = float("inf"), float("-inf")
         
@@ -34,9 +38,10 @@ class Picture():
         self.get_minmaxXY()
         n_x,n_y = self.dims[1],self.dims[0]
         x_s = np.linspace(self.min_X,self.max_X,num=n_x).tolist()
-        y_s = np.linespace(self.max_Y, self.min_Y, num=n_y).tolist()
+        y_s = np.linspace(self.max_Y, self.min_Y, num=n_y).tolist()
         points = [list(tup) for tup in product(x_s, y_s)]
-        points = np.reshape(points, (self.dims[0],self.dims[1],2)).tolist()
+        points = np.reshape(points, (self.dims[1],self.dims[0],2)).tolist()
+        points = np.swapaxes(points,0,1).tolist()
         return points
     
     def valid_dimensions(self):

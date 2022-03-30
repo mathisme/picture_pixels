@@ -2,6 +2,7 @@ from typing import Optional
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
+from picture import Picture
 
 app = FastAPI()
 app.add_middleware(CORSMiddleware, allow_origins=["*"],allow_credentials=True,
@@ -17,11 +18,10 @@ def read_root():
 
 
 @app.post("/")
-def get_pixels(picture: Picture_Info):
-    return "The dimensions you sent are: "+picture.dimensions+".  The corners you sent are "+picture.corners
-    # need to fix this later
-    # in your picture class need to remember to convert the strings to tuple and list
-    # need to also figure out how to send two strings, maybe you don't even need to picture info class.  Need to look into post on fast api
-
-
-    # Python note from ast import literal_eval and use literal_eval to convert the strings 
+def get_pixels(picture_info: Picture_Info):
+    picture = Picture(dims = picture_info.dimensions, corners=picture_info.corners)
+    if not picture.valid_dimensions() or not picture.valid_corners():
+        return "Please give valid data"
+    return str(picture.get_pixels())
+    #return "The dimensions you sent are: "+str(picture.dims)+".  The corners you sent are "+str(picture.corners)
+    
