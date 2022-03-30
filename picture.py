@@ -1,4 +1,6 @@
 from ast import literal_eval
+from itertools import product
+import numpy as np
 
 class Picture():
 
@@ -22,6 +24,20 @@ class Picture():
                 self.min_Y = corner[1]
             if corner[1] > self.max_Y:
                 self.max_Y = corner[1]
+    
+    def get_pixels(self):
+        '''
+            gets the list of pixels
+            returns an mxnx2 list
+        '''
+        # need to test this
+        self.get_minmaxXY()
+        n_x,n_y = self.dims[1],self.dims[0]
+        x_s = np.linspace(self.min_X,self.max_X,num=n_x).tolist()
+        y_s = np.linespace(self.max_Y, self.min_Y, num=n_y).tolist()
+        points = [list(tup) for tup in product(x_s, y_s)]
+        points = np.reshape(points, (self.dims[0],self.dims[1],2)).tolist()
+        return points
     
     def valid_dimensions(self):
         '''
