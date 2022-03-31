@@ -32,6 +32,8 @@ class TestPicture(unittest.TestCase):
     
     def test_get_pixels(self):
         pass
+        # [[[1.0, 3.0], [2.0, 3.0], [3.0, 3.0]], [[1.0, 2.0], [2.0, 2.0], [3.0, 2.0]], [[1.0, 1.0], [2.0, 1.0], [3.0, 1.0]]]
+        # [(1,3),(3,1),(3,3),(1,1)]
         
     def test_valid_dim(self):
         # if no dim is set, should return false
