@@ -3,7 +3,14 @@ import unittest
 
 class TestPicture(unittest.TestCase):
     def test_init(self):
-        pass
+        # testing that dim and corners are none when nothing gets passed to the constructor
+        p1 = Picture()
+        self.assertIsNone(p1.dims)
+        self.assertIsNone(p1.corners)
+        # testing none is assigned when passed invalid arguments
+        p2 = Picture("hello")
+        self.assertIsNone(p2.dims)
+        self.assertIsNone(p2.corners)
          
     def test_getminmax(self):
         pass
