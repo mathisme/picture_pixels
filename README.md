@@ -1,6 +1,16 @@
 # picture_pixels
 This repo is for the programming problem given for the Fetch Rewards MLE Apprenticeship application 
 
+# Files
+- Dockerfile
+- index.html, a basic html file used in conjuction with pixels.js to send a request to the back-end
+- main.py, this contains the FastAPI app
+- picture.py, a class created to store and validate the picture information as well as calculate and return the coordinates of all pixels.  Main.py uses this.
+- pixels.js, the javascript file that is used to get the form information from index.html and send the POST request
+- post.png.  The image of the FastAPI backed documentation
+- requirements.txt
+- testPicture.py, unit tests for the picture class.
+
 # How to run the program
 - Clone this repo to your local computer
 - Build the docker image, docker build -t myimage .
