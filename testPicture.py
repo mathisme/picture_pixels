@@ -31,13 +31,19 @@ class TestPicture(unittest.TestCase):
         # later add more tests here
     
     def test_get_pixels(self):
-        # testing the case given in the problem statement
+        # testing the first case given in the problem statement
         p1 = Picture()
         p1.dims = (3,3)
         p1.corners = [(1,3),(3,1),(3,3),(1,1)]
         self.assertEqual(p1.get_pixels(),(
         [[[1.0, 3.0], [2.0, 3.0], [3.0, 3.0]], [[1.0, 2.0], [2.0, 2.0], [3.0, 2.0]], [[1.0, 1.0], [2.0, 1.0], [3.0, 1.0]]]))
-        
+        # testing the second example given in the problem statement
+        p2 = Picture()
+        p2.dims = (2,2)
+        p2.corners = [(1.5,8),(1.5,1.5),(4,1.5),(4,8)]
+        pxls = [[[1.5,8],[4,8]],[[1.5,1.5],[4,1.5]]]
+        self.assertEqual(p2.get_pixels(),pxls)
+        # need to create more tests
         
     def test_valid_dim(self):
         # if no dim is set, should return false
