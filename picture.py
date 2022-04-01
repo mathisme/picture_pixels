@@ -5,13 +5,14 @@ import numpy as np
 class Picture():
 
     def __init__(self, dims="None", corners="None"):
-        # need to add a try catch here to check for invalid enteries
+        # need to add a try except here to check for invalid enteries as literal_eval is used
         try:
             self.dims = literal_eval(dims)
             self.corners = literal_eval(corners)
         except:
             self.dims=None
             self.corners=None
+        # sets the initial minimum and maximum X and Y values for later
         self.min_X, self.max_X = float("inf"), float("-inf")
         self.min_Y, self.max_Y = float("inf"), float("-inf")
         
@@ -34,11 +35,15 @@ class Picture():
             gets the list of pixels
             returns an mxnx2 list
         '''
-        # need to test this
+
         self.get_minmaxXY()
+        # the number of horizontal points and vertical points is taken from the dimensions
+        # notice the dimensions is row x column and so x,y would be reversed
         n_x,n_y = self.dims[1],self.dims[0]
+        # creates all x values and y values for pixels using numpy linspace 
         x_s = np.linspace(self.min_X,self.max_X,num=n_x).tolist()
         y_s = np.linspace(self.max_Y, self.min_Y, num=n_y).tolist()
+        # to get all the coordinates product is used from itertools
         points = [list(tup) for tup in product(x_s, y_s)]
         points = np.reshape(points, (self.dims[1],self.dims[0],2)).tolist()
         points = np.swapaxes(points,0,1).tolist()
