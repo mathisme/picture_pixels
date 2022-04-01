@@ -31,9 +31,13 @@ class TestPicture(unittest.TestCase):
         # later add more tests here
     
     def test_get_pixels(self):
-        pass
-        # [[[1.0, 3.0], [2.0, 3.0], [3.0, 3.0]], [[1.0, 2.0], [2.0, 2.0], [3.0, 2.0]], [[1.0, 1.0], [2.0, 1.0], [3.0, 1.0]]]
-        # [(1,3),(3,1),(3,3),(1,1)]
+        # testing the case given in the problem statement
+        p1 = Picture()
+        p1.dims = (3,3)
+        p1.corners = [(1,3),(3,1),(3,3),(1,1)]
+        self.assertEqual(p1.get_pixels(),(
+        [[[1.0, 3.0], [2.0, 3.0], [3.0, 3.0]], [[1.0, 2.0], [2.0, 2.0], [3.0, 2.0]], [[1.0, 1.0], [2.0, 1.0], [3.0, 1.0]]]))
+        
         
     def test_valid_dim(self):
         # if no dim is set, should return false
@@ -57,7 +61,21 @@ class TestPicture(unittest.TestCase):
         
     def test_valid_corners(self):
         p1 = Picture()
-        
+        # should return false if it's not a list
+        p1.corners = ((1,3),(3,7),(1,7),(3,3))
+        self.assertFalse(p1.valid_corners())
+        # return false if the length of the list is not 4
+        p1.corners = [(1,2),(2,5)]
+        self.assertFalse(p1.valid_corners())
+        # return false if each element is not a tuple
+        p1.corners = [(1,2),(2,3),[3,4],(4,5)]
+        self.assertFalse(p1.valid_corners())
+        # return false if a tuple is not of length two
+        p1.corners = [(1,2),(2,5),(1,2,3),(4,5)]
+        self.assertFalse(p1.valid_corners())
+        # return false if a tuple does not contain a number
+        p1.corners = [(1,2),('x',4),(5,7),(2,6)]
+        self.assertFalse(p1.valid_corners())
 
 if __name__ == '__main__':
     unittest.main()
