@@ -15,7 +15,7 @@ controller = {
             "corners":view.corners_text_element.value
         }
         const Http = new XMLHttpRequest();
-        Http.open("POST","http://127.0.0.1:8000/");
+        Http.open("POST","http://127.0.0.1:80/");
         Http.setRequestHeader("Content-type","application/json;charset=UTF-8");
         Http.send(JSON.stringify(data));
         Http.onreadystatechange = function() {
